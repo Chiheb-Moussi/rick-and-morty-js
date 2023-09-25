@@ -1,14 +1,19 @@
 import PaginationButton from "../components/PaginationButton";
 
-export const renderPagination = (info) => {
+export const renderPagination = (info, name="", page="") => {
+    const currentPage = page ?  Number(page) : 1;
+    const pageCount = Number(info.pages)
+    const nextPage = info.next ? currentPage + 1 : '' ;
+    const prevPage = info.prev ? currentPage - 1 : '';
 
-    const pageCount = info.count
-    const nextUrl = info.next
-    const prevUrl = info.prev
-    document.querySelector('#paginator').innerHTML = /*html */ `
+    document.querySelector('#paginator').innerHTML = /*html */ pageCount > 1 ?`
         <div class="flex justify-center gap-1 py-4 text-xl">
-            ${PaginationButton('prev', prevUrl)}
-            ${PaginationButton('next', nextUrl)}
+
+            ${PaginationButton('prev', prevPage, name)}
+            ${PaginationButton('1', 1, name)}
+            ${currentPage > 1 && currentPage < pageCount ? PaginationButton(currentPage, currentPage, name) : '' }
+            ${PaginationButton(pageCount, pageCount, name)}
+            ${PaginationButton('next', nextPage, name)}
         </div>
-    `;
+    `: '';
 }
