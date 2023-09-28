@@ -1,21 +1,13 @@
-import Header from "./components/Header";
-import InputSearch from "./components/InputSearch";
-import Pagination from "./components/Pagination";
-import PersonList from "./components/PersonList";
-import { fetchPersons } from "./service/fetchPersons";
+import Router from "./router";
+
 
 const App = () => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const name = searchParams.get('name') ?? '';
-    const page = searchParams.get('page')?? '';
-    fetchPersons(name, page);
-
     return /*html */`
-        <div class=" container py-10">
-        ${Header()}
-        ${InputSearch(name)}
-        ${PersonList()}
-        ${Pagination()}
+        <div>
+            <div class="container py-2 flex">
+                <a href="/">Home</a>
+            </div>
+            ${Router()}
         </div>
     `;
 }
